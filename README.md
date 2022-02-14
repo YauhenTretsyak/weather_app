@@ -1,1 +1,1 @@
-Link do projektu: [React Weather App](https://github.com/facebook/create-react-app)
+Link do projektu: [React Weather App](https://yauhentretsyak.github.io/weather_app/)
