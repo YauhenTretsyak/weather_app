@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/theme';
+import GlobalStyle from './styles/GlobalStyle';
+import LocationContextProvider from './context/locationService';
+import { HelmetProvider } from 'react-helmet-async';
+import { HelmetBlock } from './blocks';
+import { Header, Weather, Footer } from './components';
+import favicon from './assets/favicon.png';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HelmetProvider>
+      <ThemeProvider theme={ theme }>
+        <LocationContextProvider>
+          <GlobalStyle />
+          <HelmetBlock
+              title={ 'Weather' }
+              name={ 'Weather' }
+              content={ 'weather' }
+              description='Weather'
+              faviconUrl={ favicon }
+          />
+          <Header />
+          <Weather />
+          <Footer />
+        </LocationContextProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
