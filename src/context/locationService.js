@@ -4,7 +4,7 @@ import axios from 'axios';
 export const LocationContext = createContext();
 
 const LocationContextProvider = (props) => {
-  const apiUrl = 'http://api.openweathermap.org/'
+  const apiUrl = 'https://api.openweathermap.org/'
   const apiKey = '9980f38164f1b2cf7d9081d38f49a7fe';
   const [locationSwitchData, setLocationSwitchData] = useState({city: ''})
   const [locationWeather, setLocationWeather] = useState({temperature: ''});
