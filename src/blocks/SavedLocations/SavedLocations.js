@@ -7,6 +7,7 @@ const SavedLocations = (props) => {
   const { id, cityName, setSaveBtnActive } = props;
   const { savedLocationsData, GetUserSearchLocation, ToRemoveSavedLocations } = useContext(LocationContext);
 
+
   const ToShowHandler = () => {
     const CardData = savedLocationsData.filter((item) => {return item.id === id})
     
@@ -16,10 +17,7 @@ const SavedLocations = (props) => {
   const ToRemoveHandler = () => {
     const NewCardData = savedLocationsData.filter((item) => {return item.id !== id})
     ToRemoveSavedLocations(NewCardData)
-
-    
-      setSaveBtnActive()
-    
+    setSaveBtnActive()
   }
 
   return(

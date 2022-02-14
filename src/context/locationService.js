@@ -9,8 +9,9 @@ const LocationContextProvider = (props) => {
   const [locationSwitchData, setLocationSwitchData] = useState({city: ''})
   const [locationWeather, setLocationWeather] = useState({temperature: ''});
   const [savedLocationsData, setSavedLocations] = useState([]);
+  const [errorMessage, setErrorMesage] = useState({isError: false, error_message: ''});
 
-  //## start location
+//## start location
   const GetStartLocation = (latitudeData, longitudeData) => {
     axios.get(`${ apiUrl }geo/1.0/reverse?lat=${latitudeData}&lon=${longitudeData}&limit=5&appid=${apiKey}`)
     .then(res => {
@@ -18,28 +19,52 @@ const LocationContextProvider = (props) => {
       LocationSwitcher(res.data[0])
     });
   }
- //##
+//##
 
- //## users's search location
+//## users's search location
     const GetUserSearchLocation = (cityName) => {
       axios.get(`${ apiUrl }/data/2.5/weather?q=${ cityName }&appid=${apiKey}`)
       .then(res => {
         LocationSwitcher(res.data)
+      })
+      .catch(function (error) {
+        setErrorMesage({isError: true, error_message: 'city name'});
       });
     }
- //##
+//##
 
-  //## users's search location from zipCode
+//## users's search location from zipCode
   const GetUserSearchFromZipCode = ({ zipNumber, countryCode }) => {
     
     axios.get(`${ apiUrl }data/2.5/weather?zip=${zipNumber},${countryCode}&appid=${apiKey}`)
     .then(res => {
-      // console.log(res.data)
       LocationSwitcher(res.data)
-    });
+    })
+    .catch(function (error) {
+      setErrorMesage({isError: true, error_message: 'zip code'});
+    });;
   }
 //##
+
+const ToCloseErrorMenu = () => {
+  setErrorMesage({isError: false, error_message: 'city name'});
+}
+
+//## Save to LocalStorage
+useEffect(() => {
+  const newLocations = JSON.parse(window.localStorage.getItem('SavedWeatherLocation')) || [];
+  const savedAllLocations = savedLocationsData;
+  const locationToPage = newLocations.concat(savedAllLocations);
+  setSavedLocations(locationToPage)
+},[])
+
+
+useEffect(() => {
+  window.localStorage.setItem('SavedWeatherLocation', JSON.stringify(savedLocationsData));
+}, [savedLocationsData])
+//######
   
+
  //## Saving user's locations
   const ToSaveUsersLocations = ({id, cityName}) => {
     setSavedLocations(
@@ -57,8 +82,10 @@ const LocationContextProvider = (props) => {
   //## Removing user's saving locations
   const ToRemoveSavedLocations = (newSavedData) => {
     setSavedLocations(newSavedData)
+    window.localStorage.setItem('SavedWeatherLocation', JSON.stringify(newSavedData));
   }
   //##
+
 
   const GetWeatherData = () => {
     const city = locationSwitchData.city || 'Warsaw';
@@ -84,7 +111,7 @@ const LocationContextProvider = (props) => {
   }
 
   const GetLocationWeather = (locationWeather) => {
-    console.log(locationWeather)
+    
     setLocationWeather(
       {
         temperature: locationWeather.main.temp,
@@ -111,7 +138,9 @@ const LocationContextProvider = (props) => {
       GetUserSearchFromZipCode,
       ToSaveUsersLocations,
       savedLocationsData,
-      ToRemoveSavedLocations
+      ToRemoveSavedLocations,
+      errorMessage,
+      ToCloseErrorMenu
     }}>
       { props.children }
     </LocationContext.Provider>

@@ -1,21 +1,12 @@
 import { useContext, useEffect } from 'react';
 import { LocationContext } from '../../context/locationService';
 import { WeatherCard, ChooseCity } from '../../blocks';
-import styled from 'styled-components'
-import { SectionContainer } from '../../styles/StyledElements/'
 
-const WeatherSection = styled(SectionContainer)`
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 7.8rem;
-`
-const WheaterInfoWrapper = styled.div``
-
-const CityName = styled.p``
+import { WeatherSection, WheaterInfoWrapper, CityName } from './Weather.styles';
 
 const Weather = () => {
   const { locationSwitchData, GetStartLocation,  GetWeatherData } = useContext(LocationContext);
-  const { city, country } = locationSwitchData;
+  const { city } = locationSwitchData;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -37,15 +28,11 @@ const Weather = () => {
     GetWeatherData()
   }, [])
 
-
-
   return (
     <WeatherSection>
       <WheaterInfoWrapper>
         <CityName>{ city || '--' }</CityName>
-        {/* <p>{ country || '--' }</p> */}
         <WeatherCard />
-
       </WheaterInfoWrapper>
       <ChooseCity />
     </WeatherSection>

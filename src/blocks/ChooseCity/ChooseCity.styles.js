@@ -1,21 +1,56 @@
 import styled from 'styled-components';
+import screen_breakpoints from '../../styles/StyledElements/screen_breakpoints';
 import { FlexContainer, Button } from '../../styles/StyledElements';
 
 const ChooseCityWrapper = styled.div`
+  position: relative;
   padding-top: 5.5rem;
   width: 100%;
   max-width: 63rem;
+
+  ${ screen_breakpoints.xl } {
+    max-width: 48rem;
+  }
+
+  ${ screen_breakpoints.xxl } {
+    max-width: 63rem;
+  }
 `
 
 const SearchWrapper = styled(FlexContainer)`
   justify-content: space-around;
-  margin-bottom: 4.5rem;
+  margin-bottom: 6.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  ${ screen_breakpoints.md } {
+    margin-bottom: 4.5rem;
+
+    &:last-child {
+      margin-bottom: 4.5rem;
+    }
+  }
 `
 
 const InputBox = styled.div`
   position: relative;
+  margin-bottom: 1rem;
   width: 100%;
   max-width: 35rem;
+
+  ${ screen_breakpoints.md } {
+    margin-bottom: 0;
+  }
+
+  ${ screen_breakpoints.xl } {
+    max-width: 29rem;
+  }
+
+  ${ screen_breakpoints.xxl } {
+    max-width: 35rem;
+  }
 
   &:before {
     content: '${ props => props.text_example }';
@@ -60,14 +95,24 @@ const SearchBtn = styled(Button)`
 `
 const SaveBtnContainer = styled.div`
   display: flex;
-  justify-content: right;
+  justify-content: center;
   padding: 0 2.9rem;
   width: 100%;
+
+  ${screen_breakpoints.md} {
+    justify-content: right;
+  }
 `
 const SaveBtn = styled(SearchBtn)`
+  margin-top: -3rem;
+  margin-bottom: 1.3rem;
   ${props => props.isOnSaveOption ?
             'opacity: 1; box-shadow: inset 0 0 .8rem .3rem #00ff3b;' :
             'opacity: .4; box-shadow: inset 0 0 .8rem .3rem #ff0000;'
+  }
+
+  ${ screen_breakpoints.md } {
+    margin: 0;
   }
 
   &:hover {
@@ -82,6 +127,28 @@ const SavedLocationWrapper = styled.div``
 const SavedLocationTitle = styled.p`
   margin-left: .6rem;
 `
+const ErrorMenu = styled.div`
+  display: ${props => props.isError ? 'flex' : 'none'};
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 30rem;
+  height: 20rem;
+  background: linear-gradient(#0083ff 24%, #0009 100%);
+  box-shadow: inset 0 .3rem 1rem .1rem #00000059;
+  z-index: 100;
+`
+
+const ErrorInfo = styled.p``
+const CloseBtn = styled.p`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: red;
+`
 
 export {
   ChooseCityWrapper,
@@ -93,4 +160,7 @@ export {
   SaveBtn,
   SavedLocationWrapper,
   SavedLocationTitle,
+  ErrorMenu,
+  ErrorInfo,
+  CloseBtn
 }

@@ -13,6 +13,9 @@ import {
   SaveBtn,
   SavedLocationWrapper,
   SavedLocationTitle,
+  ErrorMenu,
+  ErrorInfo,
+  CloseBtn
 } from './ChooseCity.styles';
 
 
@@ -22,12 +25,15 @@ const ChooseCity = () => {
     GetUserSearchFromZipCode, 
     ToSaveUsersLocations, 
     locationSwitchData, 
-    savedLocationsData 
+    savedLocationsData,
+    errorMessage,
+    ToCloseErrorMenu
   } = useContext(LocationContext);
 
   const [cityName, setCityName] = useState('')
   const [zipData, setZipData] = useState('')
   const [isOnSaveOption, setIsOnSaveOption] = useState(true);
+
 
   const setSaveBtnActive = () => {
     setIsOnSaveOption(true)
@@ -78,12 +84,11 @@ const ChooseCity = () => {
     setIsOnSaveOption(false)
   }
 
-
-
   const usersLocationsList = <SavedLocationWrapper>
           <SavedLocationTitle>Saved locations:</SavedLocationTitle>
           {
             savedLocationsData.map(item => {
+              // locationToPage.map(item => {
               return(
                 <SavedLocations 
                   key={ item.id }
@@ -99,6 +104,14 @@ const ChooseCity = () => {
 
   return(
     <ChooseCityWrapper>
+      <ErrorMenu isError={ errorMessage.isError }>
+        <ErrorInfo>
+         Please write correctly { errorMessage.error_message }
+        </ErrorInfo>
+        <CloseBtn
+          onClick={ ToCloseErrorMenu }
+        >X</CloseBtn>
+      </ErrorMenu>
       <SearchWrapper>
         <InputBox 
           text_example='ex: Warsaw'
