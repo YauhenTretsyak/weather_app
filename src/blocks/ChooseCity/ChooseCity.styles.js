@@ -38,10 +38,11 @@ const InputBox = styled.div`
   position: relative;
   margin-bottom: 1rem;
   width: 100%;
-  max-width: 35rem;
+  /* max-width: 35rem; */
 
   ${ screen_breakpoints.md } {
     margin-bottom: 0;
+    max-width: 35rem;
   }
 
   ${ screen_breakpoints.xl } {
@@ -83,24 +84,31 @@ const Input = styled.input`
   }
 `
 const SearchBtn = styled(Button)`
-  max-width: 16rem;
+  /* max-width: 16rem; */
   height: 5rem;
   font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: .2rem;
 
+  ${ screen_breakpoints.md } {
+    max-width: 16rem;
+  }
+
   &:hover {
     font-size: 2.05rem;
   }
+
+
 `
 const SaveBtnContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0 2.9rem;
+  /* padding: 0 2.9rem; */
   width: 100%;
 
   ${screen_breakpoints.md} {
     justify-content: right;
+    padding: 0 2.9rem;
   }
 `
 const SaveBtn = styled(SearchBtn)`
