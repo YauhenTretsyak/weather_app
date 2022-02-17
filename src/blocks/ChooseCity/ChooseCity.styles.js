@@ -135,28 +135,6 @@ const SavedLocationWrapper = styled.div``
 const SavedLocationTitle = styled.p`
   margin-left: .6rem;
 `
-const ErrorMenu = styled.div`
-  display: ${props => props.isError ? 'flex' : 'none'};
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 30rem;
-  height: 20rem;
-  background: linear-gradient(#0083ff 24%, #0009 100%);
-  box-shadow: inset 0 .3rem 1rem .1rem #00000059;
-  z-index: 100;
-`
-
-const ErrorInfo = styled.p``
-const CloseBtn = styled.p`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: red;
-`
 
 export {
   ChooseCityWrapper,
@@ -168,7 +146,4 @@ export {
   SaveBtn,
   SavedLocationWrapper,
   SavedLocationTitle,
-  ErrorMenu,
-  ErrorInfo,
-  CloseBtn
 }

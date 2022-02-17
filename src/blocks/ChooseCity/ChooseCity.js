@@ -1,7 +1,7 @@
 import { LocationContext } from '../../context/locationService';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { SavedLocations } from '..';
+import { SavedLocations, ErrorMenu } from '..';
 
 import {
   ChooseCityWrapper,
@@ -12,10 +12,7 @@ import {
   SaveBtnContainer,
   SaveBtn,
   SavedLocationWrapper,
-  SavedLocationTitle,
-  ErrorMenu,
-  ErrorInfo,
-  CloseBtn
+  SavedLocationTitle
 } from './ChooseCity.styles';
 
 
@@ -27,7 +24,8 @@ const ChooseCity = () => {
     locationSwitchData, 
     savedLocationsData,
     errorMessage,
-    ToCloseErrorMenu
+    ToCloseErrorMenu,
+    ToDisplayZipCodeErrorMenu
   } = useContext(LocationContext);
 
   const [cityName, setCityName] = useState('')
@@ -57,7 +55,11 @@ const ChooseCity = () => {
   }
   
   const ToSearchZipCode = () => {
-    if(zipData !== '') {
+    const pattern = /[0-9]+,\s*[a-z]+/gmi,
+      str = zipData;
+    
+    if(pattern.test(str)) {
+      console.log(pattern.test(zipData));
       const zipArr = zipData.split(',');
       const zipNumber = +zipArr[0].trim();
       const countryCode = zipArr[1].trim();
@@ -71,7 +73,7 @@ const ChooseCity = () => {
       setZipData('')
       setSaveBtnActive()
     } else {
-      return
+      ToDisplayZipCodeErrorMenu()
     }
   }
 
@@ -101,17 +103,17 @@ const ChooseCity = () => {
           }
         </SavedLocationWrapper>
 
+// const pattern = /[0-9]+,\s*[a-z]+/gmi,
+// 	str = '00046,us';
+// console.log(pattern.test(str));
 
   return(
     <ChooseCityWrapper>
-      <ErrorMenu isError={ errorMessage.isError }>
-        <ErrorInfo>
-         Please write correctly { errorMessage.error_message }
-        </ErrorInfo>
-        <CloseBtn
-          onClick={ ToCloseErrorMenu }
-        >X</CloseBtn>
-      </ErrorMenu>
+      <ErrorMenu 
+        isError={ errorMessage.isError } 
+        error_message={ errorMessage.error_message }
+        ToCloseErrorMenu={ ToCloseErrorMenu }
+      /> 
       <SearchWrapper>
         <InputBox 
           text_example='ex: Warsaw'

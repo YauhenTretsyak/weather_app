@@ -34,6 +34,11 @@ const LocationContextProvider = (props) => {
 //##
 
 //## users's search location from zipCode
+
+  const ToDisplayZipCodeErrorMenu = () => {
+    setErrorMesage({isError: true, error_message: 'zip code'});
+  }
+
   const GetUserSearchFromZipCode = ({ zipNumber, countryCode }) => {
     
     axios.get(`${ apiUrl }data/2.5/weather?zip=${zipNumber},${countryCode}&appid=${apiKey}`)
@@ -41,14 +46,16 @@ const LocationContextProvider = (props) => {
       LocationSwitcher(res.data)
     })
     .catch(function (error) {
-      setErrorMesage({isError: true, error_message: 'zip code'});
+      ToDisplayZipCodeErrorMenu();
     });;
   }
 //##
 
 const ToCloseErrorMenu = () => {
-  setErrorMesage({isError: false, error_message: 'city name'});
+  setErrorMesage({isError: false, error_message: '0'});
 }
+
+
 
 //## Save to LocalStorage
 useEffect(() => {
@@ -140,7 +147,8 @@ useEffect(() => {
       savedLocationsData,
       ToRemoveSavedLocations,
       errorMessage,
-      ToCloseErrorMenu
+      ToCloseErrorMenu,
+      ToDisplayZipCodeErrorMenu,
     }}>
       { props.children }
     </LocationContext.Provider>
