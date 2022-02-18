@@ -121,7 +121,7 @@ const ChooseCity = () => {
           <Input 
             onChange={ getCityName }
             value={ cityName } 
-            placeholder='City name'
+            placeholder='City'
           />
         </InputBox>
         <SearchBtn

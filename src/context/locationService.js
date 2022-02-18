@@ -118,13 +118,16 @@ useEffect(() => {
   }
 
   const GetLocationWeather = (locationWeather) => {
+
+    console.log(locationWeather.name);
     
     setLocationWeather(
       {
         temperature: locationWeather.main.temp,
         pressure: locationWeather.main.pressure,
         windSpeed: locationWeather.wind.speed,
-        icon: locationWeather.weather[0].icon
+        icon: locationWeather.weather[0].icon,
+        city: locationWeather.name
       }
     )
   }

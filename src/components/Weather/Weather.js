@@ -5,8 +5,8 @@ import { WeatherCard, ChooseCity } from '../../blocks';
 import { WeatherSection, WheaterInfoWrapper, CityName } from './Weather.styles';
 
 const Weather = () => {
-  const { locationSwitchData, GetStartLocation,  GetWeatherData } = useContext(LocationContext);
-  const { city } = locationSwitchData;
+  const { locationWeather, GetStartLocation,  GetWeatherData } = useContext(LocationContext);
+  const  city  = locationWeather.city;
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(

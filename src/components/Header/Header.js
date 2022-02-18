@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LocationContext } from '../../context/locationService';
 
 import styled from 'styled-components';
@@ -14,8 +14,9 @@ const HeaderTitle = styled(SectionTitle)`
 
 const Header = () => {
 
-  const { locationSwitchData } = useContext(LocationContext);
-  const { city } = locationSwitchData;
+  const { locationWeather } = useContext(LocationContext);
+
+  const city = locationWeather.city
 
   return(
     <HeaderSection>
