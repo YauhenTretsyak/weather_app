@@ -116,7 +116,7 @@ const ChooseCity = () => {
       /> 
       <SearchWrapper>
         <InputBox 
-          text_example='ex: Warsaw'
+          text_example='example: Warsaw'
         >
           <Input 
             onChange={ getCityName }
@@ -132,7 +132,7 @@ const ChooseCity = () => {
       </SearchWrapper>
       <SearchWrapper>
         <InputBox 
-          text_example='ex.: 94040,us'>
+          text_example='example: 94040,us'>
           <Input 
             onChange={ getZipData }
             value={ zipData }
