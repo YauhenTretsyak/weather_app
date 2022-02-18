@@ -21,7 +21,7 @@ const ChooseCity = () => {
     GetUserSearchLocation, 
     GetUserSearchFromZipCode, 
     ToSaveUsersLocations, 
-    locationSwitchData, 
+    locationWeather,
     savedLocationsData,
     errorMessage,
     ToCloseErrorMenu,
@@ -80,7 +80,7 @@ const ChooseCity = () => {
   const ToSaveSearch = () => {
     ToSaveUsersLocations({
       id: uuidv4(),
-      cityName: locationSwitchData.city
+      cityName: locationWeather.city
     })
 
     setIsOnSaveOption(false)
