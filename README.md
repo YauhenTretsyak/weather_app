@@ -1,6 +1,8 @@
 Link do podglądu projektu na gh-pages: [React Weather App](https://yauhentretsyak.github.io/weather_app/)<br>
 Link do repozytorium na GitHubie: [Weather App repozytorium GitHub](https://github.com/YauhenTretsyak/weather_app.git)<br>
 
+Nowa wersja weather_app: [React Weather App with exchange rates](https://yauhentretsyak.github.io/weather_app_exchange_rates/)<br>
+
 Aplikacja na podstawie lokalizacji użytkownika (użytkownik na początku musi wyrazić zgodę na pobieranie danych lokalizacji) wyświetla dane pogody aktualnego miasta.<br>
 Przciskiem można wybrać wyświetlanie temperatury w K lub C. <br>
 Jest możliwość wyszukiwania pogody po nazwie miasta, lub po zip-codu miasta. Dla poprawnego wyszukiwania powinno być prawidłowo wisano nazwa, lub zip-code, w przeciwnym przypadku wyświetli się menu z tektem błędu.<br>
